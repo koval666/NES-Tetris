@@ -1,20 +1,24 @@
 package com.nes.tetris.rework;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.controllers.Controllers;
 import com.nes.tetris.rework.root.Game;
-import lombok.RequiredArgsConstructor;
+import com.nes.tetris.rework.root.input.Input;
 
-@RequiredArgsConstructor
 public class NesTetris extends ApplicationAdapter {
 
-    private final Game game;
+    private Game game;
 
     @Override
     public void create() {
+        Input input = new Input(Controllers.getControllers().get(0));
+        game = new Game(input);
+        game.init();
     }
 
     @Override
     public void render() {
         game.tik();
+        game.afterTik();
     }
 }

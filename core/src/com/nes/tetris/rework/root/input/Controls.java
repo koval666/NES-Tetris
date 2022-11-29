@@ -1,6 +1,5 @@
 package com.nes.tetris.rework.root.input;
 
-import com.nes.tetris.rework.root.ControlAction;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

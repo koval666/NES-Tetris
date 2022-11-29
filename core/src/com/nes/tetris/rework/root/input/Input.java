@@ -2,7 +2,6 @@ package com.nes.tetris.rework.root.input;
 
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
-import com.nes.tetris.rework.root.ControlAction;
 
 import java.util.Map;
 
@@ -32,8 +31,10 @@ public class Input {
                 ControlAction controlAction = keyMapping.get(buttonIndex);
                 Controls.Button button = controls.getButton(controlAction);
 
-                button.setJustPressed(true);
-                button.setPressed(true);
+                if (button != null) {
+                    button.setJustPressed(true);
+                    button.setPressed(true);
+                }
 
                 return super.buttonDown(controller, buttonIndex);
             }
@@ -44,7 +45,9 @@ public class Input {
                 ControlAction controlAction = keyMapping.get(buttonIndex);
                 Controls.Button button = controls.getButton(controlAction);
 
-                button.setPressed(false);
+                if (button != null) {
+                    button.setPressed(false);
+                }
 
                 return super.buttonUp(controller, buttonIndex);
             }
