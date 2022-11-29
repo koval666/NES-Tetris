@@ -79,6 +79,7 @@ public class TetrisGameLoop implements GameLoop {
     private int endCurtain;
     private Music endLock;
     private final Controller controller;
+    private Texture curtain;
 
     public TetrisGameLoop(boolean screenClearer,
                           int playerNumber,
@@ -513,7 +514,7 @@ public class TetrisGameLoop implements GameLoop {
         drawLines(batch);
 
         if (gameControls.getEnd(getPlayerNumber())) {
-//            endRender(batch);
+            endRender(batch);
         }
 
         batch.end();
@@ -725,23 +726,25 @@ public class TetrisGameLoop implements GameLoop {
             gameControls.getMusic().stop();
             endLock.play();
             endTimer--;
+            curtain = new Texture("C-" + (level % 10) + ".png");
         } else if (endTimer > 0) {
             endTimer--;
         }
         if (endTimer == 0) {
-            Texture[] curtain = new Texture[20 - endCurtain];
+            //todo еще можно рисовать только новые линии, а не перерисовывать их каждый раз
+            // возможно .draw тоже как-то грузит проц или память
             for (int i = 19; i >= endCurtain; i--) {
-                curtain[19 - i] = new Texture("C-" + (level % 10) + ".png");
-                batch.draw(curtain[19 - i], START_X + getCurrentPlayerZeroX(), START_Y + 24 * i);
+                batch.draw(curtain, START_X + getCurrentPlayerZeroX(), START_Y + 24 * i);
             }
             if (endCurtain > 0 && gameControls.getFrameCounter() == 0)
                 endCurtain--;
             if (key_pause_just_pressed && endCurtain == 0) {
                 for (int i = 19; i >= endCurtain; i--) {
-                    curtain[19 - i].dispose();
+                    curtain.dispose();
                 }
-                gameControls.reset();
-                gameControls.setMenuA(true);
+                //todo сделать корректную обработку
+//                gameControls.reset();
+//                gameControls.setMenuA(true);
             }
         }
     }
