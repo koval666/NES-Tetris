@@ -18,6 +18,7 @@ import java.util.Arrays;
 public class TetrisGameLoop implements GameLoop {
 
     private static final int[] HEIGHT_HELPER = {384, 339, 288, 240, 192, 147, 105};
+
     private final int KEY_RIGHT;
     private final int KEY_LEFT;
     private final int KEY_DOWN;
@@ -25,6 +26,7 @@ public class TetrisGameLoop implements GameLoop {
     private final int KEY_PAUSE;
     private final int KEY_ROTATE_RIGHT;
     private final int KEY_ROTATE_LEFT;
+
     private final int START_X = 288, START_Y = 72;
     private final int BLOCK_SIZE = 24;
     private final int[] gravities = {48, 43, 38, 33, 28, 23, 18, 13, 8, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1};
@@ -35,6 +37,7 @@ public class TetrisGameLoop implements GameLoop {
     private final int playerNumber;
     private final int width;
     int leftBlock = 4, rightBlock = 5;
+
     private boolean key_right_just_pressed;
     private boolean key_right_pressed;
     private boolean key_left_just_pressed;
@@ -45,6 +48,7 @@ public class TetrisGameLoop implements GameLoop {
     private boolean key_pause_just_pressed;
     private boolean key_rotate_right_just_pressed;
     private boolean key_rotate_left_just_pressed;
+
     private Texture img;
     private ArrayList<Integer> linesBroken;
     private int ARE;
