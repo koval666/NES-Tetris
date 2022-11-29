@@ -7,6 +7,8 @@ import com.nes.tetris.rework.scene.legal.LegalSceneFinishHandler;
 import com.nes.tetris.rework.scene.menu.MenuScene;
 import com.nes.tetris.rework.scene.menu.MenuSceneFinishHandler;
 import com.nes.tetris.rework.scene.menu.MusicType;
+import com.nes.tetris.rework.scene.menua.MenuAScene;
+import com.nes.tetris.rework.scene.menua.MenuASceneFinishHandler;
 import com.nes.tetris.rework.scene.title.TitleScene;
 import com.nes.tetris.rework.scene.title.TitleSceneFinishHandler;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +17,8 @@ import lombok.RequiredArgsConstructor;
 public class Game implements
         LegalSceneFinishHandler,
         TitleSceneFinishHandler,
-        MenuSceneFinishHandler {
+        MenuSceneFinishHandler,
+        MenuASceneFinishHandler {
 
     private final Input input;
 
@@ -45,11 +48,22 @@ public class Game implements
 
     @Override
     public void handleMenuSceneFinish(MusicType musicType) {
-        System.out.println("=========== to menu A ===========");
+        currentScene = new MenuAScene(musicType, this);
     }
 
     @Override
     public void handleMenuSceneBack() {
         currentScene = new TitleScene(this);
+    }
+
+    @Override
+    public void handleMenuASceneFinish(int level, MusicType musicType) {
+        System.out.println(level);
+        currentScene = new MenuAScene(musicType, this);
+    }
+
+    @Override
+    public void handleMenuASceneBack() {
+        currentScene = new MenuScene(this);
     }
 }
